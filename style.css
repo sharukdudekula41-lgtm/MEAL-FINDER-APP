@@ -1,0 +1,601 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Hide native scrollbars but keep scrolling behavior */
+html, body {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  background: #f4f4f4;
+  color: #222;
+}
+
+:root {
+  --nav-height: 64px;
+  --brand-color: #e8703a;
+}
+
+/* Navbar color */
+header.nav {
+  background: var(--brand-color);
+  color: #fff;
+  height: var(--nav-height);
+  position: sticky;
+  top: 0;
+  z-index: 40;
+}
+
+header.nav .navbar-brand,
+header.nav .menu-btn,
+header.nav a,
+header.nav button {
+  color: #fff !important;
+}
+
+/* Increase brand and home button size */
+header.nav .navbar-brand {
+  font-size: 26px;
+  font-weight: 900;
+  letter-spacing: 1px;
+}
+
+header.nav .navbar-brand span { font-size: 26px; }
+
+header.nav #homeBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 6px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 8px;
+  border: none;
+  margin-right: 10px;
+}
+
+header.nav #homeBtn ion-icon {
+  font-size: 22px;
+}
+
+/* larger home icon for prominence */
+header.nav #homeBtn ion-icon {
+  font-size: 28px;
+}
+
+/* Ensure hamburger sits on the navbar and is more visible */
+.menu-btn {
+  font-size: 22px;
+  padding: 6px 10px;
+  min-width: 44px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.04);
+  border-radius: 8px;
+  color: #fff;
+}
+
+.menu-btn.open { background: rgba(255,255,255,0.08); }
+/* Search box (consolidated and valid) */
+.search-box .input-group {
+  width: 100%;
+  max-width: 900px;
+}
+
+.search-box .form-control {
+  border-radius: 40px 0 0 40px;
+  font-size: 20px;
+  padding: 16px 20px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #fff;
+  border-right: none; /* remove seam with button */
+}
+
+.search-box .btn {
+  border-radius: 0 40px 40px 0;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 16px 20px;
+  border-radius: 40px;
+  font-size: 20px;
+}
+
+.search-box button {
+  background: #e8703a;
+  color: #fff;
+  border: none;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 22px;
+}
+
+.menu-btn {
+  font-size: 20px; /* smaller hamburger */
+  padding: 4px 8px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  height: 44px;
+  cursor: pointer;
+}
+
+.menu-btn.open {
+  background: rgba(255,255,255,0.06);
+  transform: rotate(0deg);
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  width: 260px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, .1);
+  transition: right .3s;
+  z-index: 20;
+  padding: 50px 20px 20px;
+  overflow-y: auto;
+}
+
+/* hide drawer's own scrollbar while preserving scroll behavior */
+.drawer {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.drawer::-webkit-scrollbar { display: none; }
+
+.drawer.open {
+  right: 0;
+}
+
+.drawer .close-btn {
+  color: #e8703a;
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 20px;
+  border: 2px solid #e8703a;
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+}
+
+.drawer ul {
+  list-style: none;
+  padding: 0;
+}
+
+.drawer li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 8px;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.drawer li img {
+  width: 56px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.drawer li span {
+  font-size: 14px;
+  color: #333;
+  font-weight: 600;
+}
+
+.drawer li:hover {
+  color: #e8703a;
+}
+
+.hero {
+  background: url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200') center/cover no-repeat;
+  min-height: calc(100vh - var(--nav-height)); /* full viewport minus navbar to avoid gap */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+  position: relative;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, .35);
+}
+
+.hero>* {
+  position: relative;
+  z-index: 1;
+}
+
+.hero h1 {
+  font-size: 48px; /* larger hero heading */
+  margin-top: 18px;
+  font-weight: 700;
+}
+
+.hero p {
+  font-size: 18px; /* larger subtitle */
+  letter-spacing: 2px;
+  margin-top: 10px;
+}
+
+.search-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  padding: 8px 0 0 0;
+  margin-bottom: 8px;
+}
+
+.search-box .input-group { width: 100%; max-width: 900px; position: relative; } /* wider search bar */
+
+.search-box { position: relative; }
+.search-box .search-btn { position: static; margin-left: 0; z-index: 3; width: 56px; height: 56px; border-radius: 0 40px 40px 0; background: var(--brand-color); border: none; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 6px 18px rgba(232,112,58,0.18); }
+.search-box .search-btn ion-icon { color: #fff; font-size: 20px; }
+.search-box .input-group .form-control { padding-right: 72px; padding-left: 20px; }
+
+/* restore left-rounded input so the button can sit in the previous Go position */
+.search-box .form-control {
+  border-radius: 40px 0 0 40px;
+  font-size: 20px; /* larger input text */
+  height: 56px;
+  padding: 0 20px;
+  display: block;
+  line-height: 56px;
+}
+
+.search-box .btn {
+  border-radius: 0 40px 40px 0;
+}
+
+.search-box input {
+  flex: 1;
+  border: none;
+  outline: none;
+  padding: 0 20px;
+  border-radius: 40px 0 0 40px;
+  font-size: 20px;
+  height: 56px;
+  line-height: 56px;
+}
+
+.search-box button {
+  background: #e8703a;
+  color: #fff;
+  border: none;
+  height: 56px;
+  padding: 0 16px;
+  border-radius: 0 40px 40px 0; /* attach flush to input */
+  cursor: pointer;
+  font-size: 22px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-left: none; /* attach to input */
+}
+
+/* Make input-group align items center so the button sits flush */
+.search-box .input-group {
+  align-items: center;
+}
+
+/* When using bootstrap input-group, ensure no extra gap */
+.input-group > .form-control:focus {
+  box-shadow: none;
+}
+
+/* ensure ion-icons inside buttons are centered and sized */
+button ion-icon, .menu-btn ion-icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 30px 20px;
+}
+
+.section-title {
+  font-size: 14px;
+  letter-spacing: 2px;
+  padding-bottom: 6px;
+  border-bottom: 3px solid #e8703a;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.cats-grid {
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.meals-grid {
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.card {
+  background: #fff;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .06);
+  cursor: pointer;
+  position: relative;
+  transition: transform .15s;
+}
+
+/* make card content flow vertically and keep consistent sizing */
+.card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 12px 28px rgba(0,0,0,0.18);
+  transition: box-shadow .18s, transform .18s, border-radius .18s;
+}
+
+/* Wrapper to enforce uniform image display and cropping */
+.img-wrap {
+  width: 100%;
+  height: 220px;
+  overflow: hidden;
+  display: block;
+}
+.img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* overlay name positioned top-right on the card image (only when .name follows .img-wrap) */
+.card .img-wrap + .name {
+  position: static; /* place name below the image */
+  margin-top: 8px;
+  background: transparent;
+  color: #222; /* dark text for food items */
+  padding: 6px 10px 12px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 700;
+  max-width: 100%;
+  text-align: center;
+}
+
+.card .tag { /* keep tag style small when used inside overlay */
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: 13px;
+}
+
+@media (min-width: 900px) {
+  .cats-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .meals-grid { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+  .img-wrap { height: 240px; }
+}
+
+@media (min-width: 1200px) {
+  .cats-grid { grid-template-columns: repeat(4, 1fr); }
+  .meals-grid { grid-template-columns: repeat(4, 1fr); }
+  .img-wrap { height: 260px; }
+}
+
+.card .tag {
+  position: static;
+  display: inline-block;
+  background: #e8703a;
+  color: #fff;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  letter-spacing: 1px;
+  margin-bottom: 6px;
+}
+
+/* Position orange tags on the top-right for category cards only */
+.cats-grid .card {
+  position: relative; /* ensure absolute tag is positioned relative to card */
+}
+.cats-grid .card .tag {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  margin: 0;
+  font-size: 12px;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
+.card .name {
+  padding: 10px;
+  font-size: 14px;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Focused (clicked) image visual */
+.img-focused,
+.card img.img-focused {
+  box-shadow: 0 22px 54px rgba(0,0,0,0.45) !important;
+  transform: scale(1.03);
+  border-radius: 14px;
+  margin-bottom: 8px;
+}
+
+/* When drawer is open we lock body scrolling */
+body.drawer-open {
+  overflow: hidden;
+}
+
+/* utility hidden class used by JS to toggle visibility */
+.hidden { display: none !important; }
+
+.cat-info p {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #555;
+}
+
+.cat-info {
+  background: #fff;
+  padding: 18px;
+  border-radius: 6px;
+  margin-bottom: 18px;
+}
+
+.crumb {
+  background: #e8703a;
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 4px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+
+.crumb a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.meal-detail {
+  background: #fff;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 24px;
+}
+
+.meal-detail .top {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  align-items: start; /* ensure image and details align at the top */
+}
+
+@media(min-width: 700px) {
+  .meal-detail .top {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.meal-detail img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 0; /* remove any default spacing under the image */
+}
+
+.meal-detail h2 {
+  color: #e8703a;
+  margin-bottom: 12px;
+}
+
+.meal-detail .meta {
+  font-size: 13px;
+  margin: 8px 0;
+}
+
+.meal-detail .meta b {
+  color: #333;
+}
+
+.ingredients {
+  background: #e8703a;
+  color: #fff;
+  padding: 14px;
+  border-radius: 6px;
+  margin-top: 12px;
+}
+
+.ingredients h4 {
+  margin-bottom: 8px;
+}
+
+.ingredients ol {
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 1.7;
+  column-count: 2;
+}
+
+.instructions {
+  margin-top: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+  color: #444;
+}
+
+.instructions p {
+  white-space: pre-wrap; /* preserve paragraph breaks and wrap long lines */
+  word-break: break-word;
+}
+
+/* Remove extra margin inside the meal-detail when images are focused */
+.meal-detail .img-focused,
+.meal-detail img.img-focused {
+  margin-bottom: 0 !important;
+}
+
+/* Reduce paragraph spacing within instructions to avoid small gaps */
+.instructions p {
+  margin: 0 0 10px; /* compact spacing between paragraphs */
+}
+
+.instructions h4 {
+  margin-bottom: 8px;
+}
+
+.footer {
+  background: #070707e3;
+  height: 60px;
+  margin-top: 30px;
+}
